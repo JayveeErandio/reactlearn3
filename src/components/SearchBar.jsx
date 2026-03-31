@@ -10,13 +10,13 @@ export default function SearchBar({ onSearch }) {
 
   return (
     <div className="shadow-md bg-white flex items-center rounded-4xl px-3 w-full">
-      <img src="icons/search.svg" className="opacity-75 max-h-5 " />
+      <img src="icons/search.svg" className="opacity-75 h-5.5 " />
       <input
         type="text"
         value={query}
         onChange={handleChange}
-        placeholder="Search for chips, soab bar, etc..."
-        className="outline-none text-xs text-gray-700 p-3 w-full"
+        placeholder="Search for chips, soap bar, etc..."
+        className="outline-none text-xs text-gray-700 px-2 py-3 w-full"
       />
     </div>
   );
