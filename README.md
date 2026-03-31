@@ -1,3 +1,5 @@
+Live Demo Output: [text](https://jayveeerandio.github.io/grocerian/)
+
 Hello there!
 
 This website is used only for showcasing my skills for React and Tailwind. Let's also add the usage of CI/CD, though I'm not sure if that's the right term but what I mean there is the automation of building process of my code.
