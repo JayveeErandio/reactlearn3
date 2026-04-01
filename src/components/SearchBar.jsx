@@ -1,6 +1,7 @@
 import { useState } from "react";
+import "tailwindcss";
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, className }) {
   const [query, setQuery] = useState("");
 
   const handleChange = (e) => {
@@ -10,13 +11,13 @@ export default function SearchBar({ onSearch }) {
 
   return (
     <div
-      className="shadow-md card flex items-center rounded-4xl px-3 w-full"
-      style={{ background: "var(--background2" }}
+      className={className + " shadow-md flex items-center rounded-4xl px-3 "}
+      style={{ background: "var(--background2)" }}
     >
       <img
         src="icons/search.svg"
-        className="opacity-75 h-6 "
-        style={{ filter: "var(--invert" }}
+        className="h-6"
+        style={{ filter: "var(--invert)" }}
       />
       <input
         type="text"

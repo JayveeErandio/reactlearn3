@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function DarkModeButton() {
+export default function DarkModeButton({ className }) {
   const temp = document.querySelector("body");
   let [mode, setMode] = useState("light");
   const oppose = () => {
@@ -11,7 +11,7 @@ export default function DarkModeButton() {
 
   return (
     <img
-      className="h-7"
+      className={" h-7 cursor-pointer " + className}
       onClick={() => {
         setMode(oppose());
       }}
