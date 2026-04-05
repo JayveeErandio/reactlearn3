@@ -31,7 +31,7 @@ export default function App() {
                 <ProductCard
                   key={products.id}
                   name={products.name}
-                  price={products.price}
+                  price={products.price?.toFixed(2)}
                 />
               ))}
               <div className="h-6 col-span-full"></div>
