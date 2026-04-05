@@ -1,21 +1,21 @@
 import { useState } from "react";
 
-export default function ItemNoProductPage() {
+export default function ItemNoProductPage(props) {
   let [quantity, setQuantity] = useState(0);
 
   return (
     <div
-      className="relative"
+      className={props.className}
       style={{
-        width: 120,
-        height: 120,
+        width: 95,
+        height: 95,
       }}
     >
       <div
         className={`${quantity > 0 ? "w-full h-full " : "w-0 h-0"} absolute top-1/2 left-1/2 -translate-1/2`}
       >
         <div
-          className="w-full rotate-45 h-full scale-x-35 scale-y-125 bg-red-500"
+          className="w-full rotate-45 h-full scale-x-35 scale-y-120 bg-red-500"
           style={{
             borderRadius: "50% / 15%",
             background: "var(--background4)",
@@ -23,7 +23,7 @@ export default function ItemNoProductPage() {
         ></div>
         <img
           src="icons/add.svg"
-          className={"cursor-pointer absolute right-1/10 top-1/10 w-18/100"}
+          className={"cursor-pointer absolute right-12/100 top-12/100 w-18/100"}
           style={{ filter: "var(--invert)" }}
           onClick={() => {
             setQuantity(++quantity);
@@ -31,7 +31,7 @@ export default function ItemNoProductPage() {
         />
         <img
           src={"icons/" + (quantity == 1 ? "delete" : "minus") + ".svg"}
-          className="cursor-pointer absolute bottom-1/10 left-1/10 w-1/5"
+          className="cursor-pointer absolute bottom-12/100 left-12/100 w-1/5"
           style={{ filter: "var(--invert)" }}
           onClick={() => {
             setQuantity(--quantity);
@@ -39,10 +39,11 @@ export default function ItemNoProductPage() {
         />
       </div>
       <p
-        className="text-3xl flex justify-center items-center text-white absolute top-1/2 left-1/2 -translate-1/2 w-45/100 h-45/100"
+        className="text-2xl flex justify-center items-center text-white absolute top-1/2 left-1/2 -translate-1/2 w-45/100 h-45/100"
         style={{
           borderRadius: 100,
-          background: "var(--background3)",
+          background:
+            quantity == 0 ? "var(--background1)" : "var(--background3)",
         }}
       >
         {quantity > 0 ? (
@@ -55,14 +56,18 @@ export default function ItemNoProductPage() {
             src="icons/add.svg"
             alt="Add item"
             className="w-1/2 h-1/2 cursor-pointer"
-            style={{ fill: "white" }}
+            style={{ filter: "invert(0.8)" }}
             width="35px"
             height="35px"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M 12 0 V 24 M 0 12 H 24" stroke="#fff" strokeWidth="3" />
+            <path
+              d="M 12 0 V 24 M 0 12 H 24"
+              stroke={"var(--background2)"}
+              strokeWidth="3"
+            />
           </svg>
         )}
       </p>
