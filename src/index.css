@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "archivo";
-  src: url("font.ttf");
+  src: url("/font.ttf");
 }
 
 * {
@@ -11,7 +11,7 @@
 }
 
 :root {
-  --background1: #695f5f;
+  --background1: #e7e7e7;
   --background2: #fff;
   --color1: #272727;
   --color2: #aaa;
