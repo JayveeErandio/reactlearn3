@@ -15,6 +15,7 @@ export function UserProvider({ children }) {
       : {
           cart: [],
           darkMode: false,
+          showCart: true,
         };
   });
 

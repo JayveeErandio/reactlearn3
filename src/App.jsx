@@ -4,6 +4,8 @@ import Header from "./components/Header.jsx";
 import ProductCard from "./components/ProductCard.jsx";
 import groceryData from "./data/products.js";
 import { UserProvider } from "./data/userdata.jsx";
+import CartPage from "./components/CartPage.jsx";
+import CartButton from "./components/CartButton.jsx";
 
 export default function App() {
   return (
@@ -42,6 +44,8 @@ export default function App() {
           </div>
         </div>
       </div>
+      <CartButton className="fixed bottom-8 right-8 z-1 w-20 lg:hidden" />
+      <CartPage />
     </UserProvider>
   );
 }
