@@ -1,19 +1,32 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../data/userdata";
 
 export default function CartPage() {
   const { userData, setUserData } = useContext(UserContext);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (userData.showCart) setShow(true);
+    else {
+      setTimeout(function () {
+        setShow(false);
+      }, 500);
+    }
+  }, [userData.showCart]);
 
   return (
-    <div className={userData.showCart ? "block" : "hidden"}>
+    <div className={show ? "block" : "hidden"}>
       <div
         className={
           "fixed w-full h-full z-2 bg-black top-0 opacity-30 " +
-          (userData.showCart ? "lg:block" : "")
+          (show ? "lg:block" : "")
         }
       ></div>
       <div
-        className={"w-full lg:w-90 h-full fixed top-0 lg:top-0 lg:right-0 z-2"}
+        className={
+          " w-full lg:w-90 h-full fixed top-0 lg:top-0 lg:right-0 z-2 " +
+          (userData.showCart ? "cartPageMobileIn" : "cartPageMobileOut")
+        }
         style={{ background: "var(--background1)" }}
       >
         <div className="mt-12 mx-5 sm:w-110 sm:mx-auto lg:w-auto lg:mx-5">

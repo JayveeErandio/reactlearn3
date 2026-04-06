@@ -33,3 +33,35 @@
 input::placeholder {
   color: var(--color2);
 }
+
+.cartPageMobileIn {
+  animation: mobileIn 0.5s;
+}
+
+.cartPageMobileOut {
+  animation: mobileOut 0.5s forwards;
+}
+
+@keyframes mobileIn {
+  0% {
+    transform: translate(30%, 40%) scale(15%, 10%);
+  }
+  50% {
+    transform: translate(30%, 0%) scale(15%, 100%);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(100%, 100%);
+  }
+}
+
+@keyframes mobileOut {
+  0% {
+    transform: translate(0%, 0%) scale(100%, 100%);
+  }
+  50% {
+    transform: translate(30%, 0%) scale(15%, 100%);
+  }
+  100% {
+    transform: translate(30%, 40%) scale(15%, 10%);
+  }
+}
