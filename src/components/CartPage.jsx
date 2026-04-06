@@ -31,6 +31,7 @@ export default function CartPage() {
                 style={{ filter: "var(--invert)" }}
                 onClick={() => {
                   setUserData({ ...userData, showCart: false });
+                  document.querySelector("body").style.overflow = "";
                 }}
               />
             </div>

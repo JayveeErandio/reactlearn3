@@ -17,6 +17,7 @@ export default function CartButton(props) {
       }}
       onClick={() => {
         setUserData({ ...userData, showCart: true });
+        document.querySelector("body").style.overflow = "hidden";
       }}
     >
       <img
