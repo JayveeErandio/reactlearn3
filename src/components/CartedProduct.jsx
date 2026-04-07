@@ -1,12 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
+import { ProductCarted, UserContext } from "../data/userdata";
 
 export default function CartedProduct(props) {
+  const { userData, setUserData } = useContext(UserContext);
+  const [quantity, setQuantity] = useState(props.prod.quantity);
+
   function sentenceCase(text) {
     return text
       ?.split(" ")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   }
+
+  useEffect(() => {
+    const temp = userData.cart.map((item) =>
+      item.id == props.prod.id ? { ...item, quantity: quantity } : item,
+    );
+    setUserData({
+      ...userData,
+      cart: temp,
+    });
+  }, [quantity]);
 
   const cost = props.reference.price * props.prod.quantity;
   useEffect(() => {
@@ -46,6 +60,9 @@ export default function CartedProduct(props) {
               background: "var(--background1)",
               color: "var(--color1)",
             }}
+            onClick={() => {
+              setQuantity(quantity - 1);
+            }}
           >
             –
           </button>
@@ -53,7 +70,7 @@ export default function CartedProduct(props) {
             className="flex w-11 font-bold text-sm justify-center items-center"
             style={{ color: "var(--color3)" }}
           >
-            x{props.prod.quantity}
+            x{quantity}
           </p>
           <button
             className="w-7.5 rounded-md aspect-square text-xl"
@@ -61,7 +78,9 @@ export default function CartedProduct(props) {
               background: "var(--background1)",
               color: "var(--color1)",
             }}
-            onClick={() => {}}
+            onClick={() => {
+              setQuantity(quantity + 1);
+            }}
           >
             +
           </button>
