@@ -35,7 +35,7 @@ export default function App() {
                     key={products.id}
                     id={products.id}
                     name={products.name}
-                    price={products.price?.toFixed(2)}
+                    price={products.price}
                   />
                 ))}
                 <div className="h-6 col-span-full"></div>

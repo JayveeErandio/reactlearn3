@@ -1,10 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { ProductCarted, UserContext } from "../data/userdata";
 import groceryData from "../data/products.js";
+import CartedProduct from "./CartedProduct.jsx";
 
 export default function CartPage() {
   const { userData, setUserData } = useContext(UserContext);
   const [show, setShow] = useState(false);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (userData.showCart) setShow(true);
@@ -31,13 +33,6 @@ export default function CartPage() {
         if (product.id == id) return product;
       }
     }
-  }
-
-  function sentenceCase(text) {
-    return text
-      ?.split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
   }
 
   return (
@@ -109,41 +104,25 @@ export default function CartPage() {
                 );
             })()}
             {userData.cart.map((productCarted, index) => (
-              <div
+              <CartedProduct
+                prod={productCarted}
                 key={index}
-                className="my-6 rounded-xl shadow-md p-1 flex gap-1 pt-2"
-                style={{ background: "var(--background2)" }}
-              >
-                <img
-                  src="icons/checkbox_unchecked.svg"
-                  style={{ filter: "var(--invert)" }}
-                  className="w-8"
-                />
-                <div className="h-14 aspect-square relative">
-                  <img
-                    className="object-cover absolute top-1/2 -translate-y-1/2"
-                    src={"products/" + getData(productCarted.id).name + ".png"}
-                  />
-                </div>
-                <div className="ml-2 text-sm">
-                  <p style={{ color: "var(--color1)" }}>
-                    {sentenceCase(getData(productCarted.id).name)}
-                  </p>
-                  <p className="text-xs" style={{ color: "var(--color3)" }}>
-                    ₱{getData(productCarted.id).price}
-                  </p>
-                </div>
-              </div>
+                id={index}
+                reference={getData(productCarted.id)}
+                setTotal={setTotal}
+              />
             ))}
           </div>
           <footer
-            className="z-1 flex justify-between p-5 rounded-t-3xl"
+            className="z-1 flex justify-between p-5 py-8 rounded-t-3xl"
             style={{ background: "#080" }}
           >
             <button>Buy Now</button>
-            <div className="text-right">
-              <p>Total</p>
-              <p>P365.07</p>
+            <div className="text-right leading-none">
+              <p className="text-gray-300">Total</p>
+              <p className="text-2xl font-bold text-white">
+                ₱{total.toFixed(2)}
+              </p>
             </div>
           </footer>
         </div>

@@ -23,7 +23,10 @@ export default function ProductCard(props) {
         ? userData.cart.map((item) =>
             item.id == props.id ? { ...item, quantity: quantity } : item,
           )
-        : [...userData.cart, { id: props.id, quantity: quantity }];
+        : [
+            ...userData.cart,
+            { id: props.id, quantity: quantity, isListed: true },
+          ];
 
       setUserData({
         ...userData,
@@ -65,7 +68,7 @@ export default function ProductCard(props) {
             : "Product"}
         </p>
         <p className="font-bold text-md">
-          {props.price ? "₱" + props.price : "Price"}
+          {props.price ? "₱" + props.price?.toFixed(2) : "Price"}
         </p>
       </div>
       <ItemNoProductPage
