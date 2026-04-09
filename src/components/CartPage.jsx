@@ -48,6 +48,7 @@ export default function CartPage() {
   }
 
   function verifySelection() {
+    if (userData.cart.length == 0) return false;
     for (let product of userData.cart) if (!product.isListed) return false;
     return true;
   }
@@ -55,6 +56,9 @@ export default function CartPage() {
   return (
     <div className={show ? "block" : "hidden"}>
       <div
+        onClick={() => {
+          setUserData({ ...userData, showCart: false });
+        }}
         className={
           "fixed w-full h-full z-2 bg-black top-0 opacity-30 " +
           (show ? "lg:block" : "")
@@ -112,7 +116,14 @@ export default function CartPage() {
                 </div>
               </div>
               <div className="flex-1 flex justify-center py-1">
-                <button className="cursor-pointer bg-rose-500 text-white px-3 rounded-md active:bg-rose-700">
+                <button
+                  className={
+                    "bg-rose-500 text-white px-3 rounded-md " +
+                    (total == 0
+                      ? "opacity-35 cursor-not-allowed"
+                      : "cursor-pointer active:bg-rose-700 ")
+                  }
+                >
                   Remove From Cart
                 </button>
               </div>
@@ -166,7 +177,21 @@ export default function CartPage() {
             className="z-1 flex justify-between p-5 py-8 rounded-t-3xl"
             style={{ background: "#080" }}
           >
-            <button>Buy Now</button>
+            <button
+              className={
+                "ml-1 bg-white rounded-3xl p-3 px-9 " +
+                (total == 0
+                  ? "opacity-35 cursor-not-allowed"
+                  : "cursor-pointer ")
+              }
+              onClick={() => {
+                if (total > 0) {
+                  setUserData({ ...userData, showCart: false });
+                }
+              }}
+            >
+              Buy Now
+            </button>
             <div className="text-right leading-none">
               <p className="text-gray-300">Total</p>
               <p className="text-2xl font-bold text-white">

@@ -37,7 +37,7 @@ export default function CartedProduct(props) {
       />
       <div className="h-14 aspect-square relative">
         <img
-          className="object-cover absolute top-1/2 -translate-y-1/2"
+          className="select-none object-cover absolute top-1/2 -translate-y-1/2"
           src={"products/" + props.reference.name + ".png"}
         />
       </div>
@@ -52,7 +52,7 @@ export default function CartedProduct(props) {
       <div className="mr-2 flex flex-col gap-1.5">
         <div className="flex">
           <button
-            className="w-7.5 rounded-md aspect-square font-bold"
+            className="cursor-pointer w-7.5 rounded-md aspect-square font-bold"
             style={{
               background: "var(--background1)",
               color: "var(--color1)",
@@ -70,7 +70,7 @@ export default function CartedProduct(props) {
             x{quantity}
           </p>
           <button
-            className="w-7.5 rounded-md aspect-square text-xl"
+            className="cursor-pointer w-7.5 rounded-md aspect-square text-xl"
             style={{
               background: "var(--background1)",
               color: "var(--color1)",

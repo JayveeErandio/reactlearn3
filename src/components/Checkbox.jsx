@@ -6,7 +6,7 @@ export default function Checkbox({
 }) {
   return (
     <svg
-      className={className}
+      className={"cursor-pointer " + className}
       width="2rem"
       height="2rem"
       viewBox="0 0 24 24"
