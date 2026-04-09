@@ -1,10 +1,15 @@
 import { useEffect, useState, useContext } from "react";
+import Checkbox from "./Checkbox";
+import { UserContext } from "../data/userdata";
 
 export default function CartedProduct(props) {
   let [defQuantity, defSetQuantity] = useState(0);
-
   let quantity = props.quantity ?? defQuantity;
   let setQuantity = props.setQuantity ?? defSetQuantity;
+
+  let [defCheck, defSetCheck] = useState(false);
+  let check = props.check ?? defCheck;
+  let setCheck = props.setCheck ?? defSetCheck;
 
   function sentenceCase(text) {
     return text
@@ -24,10 +29,11 @@ export default function CartedProduct(props) {
       className="my-6 rounded-xl shadow-md p-1 flex gap-1 pt-2"
       style={{ background: "var(--background2)" }}
     >
-      <img
-        src="icons/checkbox_unchecked.svg"
-        style={{ filter: "var(--invert)" }}
-        className="w-8"
+      <Checkbox
+        className="self-center"
+        check={check}
+        setCheck={setCheck}
+        color="var(--background1)"
       />
       <div className="h-14 aspect-square relative">
         <img
@@ -35,7 +41,7 @@ export default function CartedProduct(props) {
           src={"products/" + props.reference.name + ".png"}
         />
       </div>
-      <div className="ml-2 text-sm w-full">
+      <div className="ml-2 text-sm flex-1">
         <p style={{ color: "var(--color1)" }}>
           {sentenceCase(props.reference.name)}
         </p>

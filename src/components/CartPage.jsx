@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { ProductCarted, UserContext } from "../data/userdata";
 import groceryData from "../data/products.js";
 import CartedProduct from "./CartedProduct.jsx";
+import Checkbox from "./Checkbox.jsx";
 
 export default function CartPage() {
   const { userData, setUserData } = useContext(UserContext);
@@ -10,7 +11,8 @@ export default function CartPage() {
   function performTotal() {
     let temp = 0;
     for (let product of userData.cart) {
-      temp += getData(product.id).price * product.quantity;
+      if (product.isListed)
+        temp += getData(product.id).price * product.quantity;
     }
     setTotal(temp);
   }
@@ -43,6 +45,11 @@ export default function CartPage() {
         if (product.id == id) return product;
       }
     }
+  }
+
+  function verifySelection() {
+    for (let product of userData.cart) if (!product.isListed) return false;
+    return true;
   }
 
   return (
@@ -85,11 +92,21 @@ export default function CartPage() {
               }}
             >
               <div className="flex-1 border-r-1 border-gray-400">
-                <div className="ml-1 cursor-pointer flex gap-1 items-center w-max">
-                  <img
-                    style={{ filter: "var(--invert)" }}
-                    className="w-8"
-                    src="icons/checkbox_unchecked.svg"
+                <div
+                  onClick={() => {
+                    setUserData({
+                      ...userData,
+                      cart: userData.cart.map((item) => ({
+                        ...item,
+                        isListed: !verifySelection(),
+                      })),
+                    });
+                  }}
+                  className="ml-1 cursor-pointer flex gap-1 items-center w-max"
+                >
+                  <Checkbox
+                    check={verifySelection()}
+                    color="var(--background1)"
                   />
                   <p style={{ color: "var(--color1)" }}>Select All</p>
                 </div>
@@ -115,15 +132,24 @@ export default function CartPage() {
             })()}
             {userData.cart.map((product, index) => (
               <CartedProduct
-                quantity={
-                  userData.cart.find((item) => item.id == product.id).quantity
-                }
+                quantity={product.quantity}
                 setQuantity={(newQuantity) => {
                   setUserData((prev) => ({
                     ...prev,
                     cart: prev.cart.map((item) =>
                       item.id === product.id
                         ? { ...item, quantity: newQuantity }
+                        : item,
+                    ),
+                  }));
+                }}
+                check={product.isListed}
+                setCheck={() => {
+                  setUserData((prev) => ({
+                    ...prev,
+                    cart: prev.cart.map((item) =>
+                      item.id === product.id
+                        ? { ...item, isListed: !product.isListed }
                         : item,
                     ),
                   }));
