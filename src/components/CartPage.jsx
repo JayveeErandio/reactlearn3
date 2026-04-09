@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, use } from "react";
-import { ProductCarted, UserContext } from "../data/userdata";
+import { UserContext } from "../data/userdata";
 import groceryData from "../data/products.js";
 import CartedProduct from "./CartedProduct.jsx";
 import Checkbox from "./Checkbox.jsx";
@@ -43,6 +43,16 @@ export default function CartPage({ setPurchase, setCost }) {
   function outAnim() {
     if (window.innerWidth < 1024) return "cartPageMobileOut";
     else return "cartPageDesktopOut";
+  }
+
+  function cartOut() {
+    setUserData({
+      ...userData,
+      cart: userData.cart.filter((product) => {
+        return !product.isListed;
+      }),
+      showCart: false,
+    });
   }
 
   function getData(id) {
@@ -215,7 +225,7 @@ export default function CartPage({ setPurchase, setCost }) {
                 if (total > 0) {
                   setCost(total);
                   setPurchase(true);
-                  setUserData({ ...userData, showCart: false });
+                  cartOut();
                 }
               }}
             >
