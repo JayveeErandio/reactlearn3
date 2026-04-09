@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke-linejoin="round" stroke-linecap="round" width="200" height="200" viewBox="4 8 90 92">
+	<path stroke-width="6.4" stroke="#333" d="M10 20 H 20 L 30 75 H 80 M 22 31 H 82 L 75 64 H 28" fill="none"/>
+	<g>
+		<circle id="cir" r="5" cx="30" cy="85" fill="#333"/>
+		<use href="#cir" x="47"/>
+	</g>
+	<g>
+		<g>
+			<g>
+				<use href="#cir" x="12" y="-42" />
+				<circle r="1.5" cx="43.5" cy="41.5" fill="white"/>
+			</g>
+			<g>
+				<use href="#cir" x="33" y="-42"/>
+				<circle r="1.5" cx="64.5" cy="41.5" fill="white"/>
+			</g>
+		</g>
+	</g>
+</svg>
