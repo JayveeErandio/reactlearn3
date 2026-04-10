@@ -20,10 +20,11 @@ export default function CartButton(props) {
 
     async function loop() {
       while (running) {
+        await sleep(1500);
         setAnimation("seek");
         await sleep(1800); // duration of seek
         setAnimation("");
-        await sleep(3000); // duration of seek
+        await sleep(2000); // duration of seek
       }
     }
 
