@@ -12,14 +12,16 @@ export default function CartButton(props) {
   return (
     <div className={props.className}>
       <div
-        className={" cursor-pointer overflow-hidden shadow-lg aspect-square"}
+        className={
+          " bg-(--background2)  cursor-pointer overflow-hidden shadow-lg aspect-square"
+        }
         style={{ borderRadius: "100%" }}
         onClick={() => {
           setUserData({ ...userData, showCart: true });
           document.querySelector("body").style.overflow = "hidden";
         }}
       >
-        <CartLogo className="w-full h-full bg-(--background2) p-[18%] filter-(--invert)" />
+        <CartLogo className="w-full h-full p-[18%] filter-(--invert)" />
       </div>
       <p
         className={
