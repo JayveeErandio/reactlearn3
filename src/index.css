@@ -32,6 +32,10 @@
   --invert: invert(100%);
 }
 
+body {
+  overflow-y: scroll;
+}
+
 input::placeholder {
   color: var(--color2);
 }
