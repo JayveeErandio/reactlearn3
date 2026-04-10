@@ -255,7 +255,7 @@ export default function CartPage({ setPurchase, setCost }) {
           <>
             Remove{" "}
             {isNaN(productRemove[0]) ? (
-              <strong>{productRemove}</strong>
+              <strong>{sentence_case(productRemove)}</strong>
             ) : (
               <>
                 {"the "}
