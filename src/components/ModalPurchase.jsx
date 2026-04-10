@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { date_format, money_format } from "../functions";
+import CartLogo from "./CartLogo";
 
 export default function ModalPurchase({ cost = 0, state }) {
   let [show, setShow] = useState(false);
@@ -29,7 +30,7 @@ export default function ModalPurchase({ cost = 0, state }) {
         className="flex flex-col gap-4 rounded-lg w-80 mx-auto self-center p-6"
         style={{ background: "var(--background1)" }}
       >
-        <img src="icons/cart_logo.svg" className="w-15 mx-auto" />
+        <CartLogo className="w-15 mx-auto filter-(--invert)" />
         <p
           className="border-b-1 pb-5 text-center text-xl"
           style={{ color: "var(--color1)" }}

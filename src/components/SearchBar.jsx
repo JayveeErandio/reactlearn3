@@ -27,6 +27,15 @@ export default function SearchBar({ onSearch, className }) {
         className="outline-none text-sm px-2 py-3 w-full"
         style={{ color: "var(--color1)" }}
       />
+      <img
+        onClick={() => {
+          setQuery("");
+          onSearch("");
+        }}
+        className={(query == "" ? "hidden" : "") + " cursor-pointer w-5"}
+        src="icons/cancel.svg"
+        style={{ filter: "var(--invert)" }}
+      />
     </div>
   );
 }

@@ -69,7 +69,16 @@ export default function App() {
           </div>
         </div>
       </div>
-      <CartButton className="fixed bottom-8 right-8 z-1 w-20 lg:hidden" />
+      <CartButton
+        quantity={(() => {
+          let overall = 0;
+          for (let prod of userData.cart) {
+            overall += prod.quantity;
+          }
+          return overall;
+        })()}
+        className="fixed bottom-8 right-8 z-1 w-21 lg:hidden"
+      />
       <CartPage setPurchase={setShowPurchase} setCost={setCost} />
       <ModalPurchase cost={cost} state={[showPurchase, setShowPurchase]} />
     </>

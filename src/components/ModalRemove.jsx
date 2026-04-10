@@ -1,3 +1,5 @@
+import CartLogo from "./CartLogo";
+
 export default function ModalRemove({ ids, set, message, state }) {
   return (
     <div
@@ -10,7 +12,7 @@ export default function ModalRemove({ ids, set, message, state }) {
         className="flex flex-col gap-4 rounded-lg w-80 mx-auto self-center p-5"
         style={{ background: "var(--background1)" }}
       >
-        <img src="icons/cart_logo.svg" className="w-15 mx-auto" />
+        <CartLogo className="w-15 mx-auto filter-(--invert)" />
         <p className="text-center mb-2" style={{ color: "var(--color1)" }}>
           {message ?? "Sure you want to remove?"}
         </p>
