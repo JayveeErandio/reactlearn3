@@ -40,6 +40,20 @@ const categories = [
       { id: 309, name: "potato", price: 40 },
     ],
   },
+  {
+    id: 4,
+    name: "Meat & Proteins",
+    products: [
+      { id: 401, name: "poultry", price: 35 },
+      { id: 402, name: "pork", price: 30 },
+      { id: 403, name: "beef steak", price: 40 },
+      { id: 404, name: "beef rib", price: 40 },
+      { id: 405, name: "bacon", price: 40 },
+      { id: 406, name: "hotdog", price: 40 },
+      { id: 407, name: "fish", price: 40 },
+      { id: 408, name: "eggs", price: 40 },
+    ],
+  },
 ];
 
 const prepareProducts = () => {
