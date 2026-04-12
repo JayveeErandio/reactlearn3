@@ -31,7 +31,6 @@ export default function CartPage({ setPurchase, setCost }) {
     else {
       setTimeout(function () {
         setShow(false);
-        document.querySelector("body").style.overflow = "";
       }, 500);
     }
   }, [userData.showCart]);
@@ -101,6 +100,7 @@ export default function CartPage({ setPurchase, setCost }) {
                 src="icons/back.svg"
                 style={{ filter: "var(--invert)" }}
                 onClick={() => {
+                  document.querySelector("body").style.overflow = "";
                   setUserData({ ...userData, showCart: false });
                 }}
               />

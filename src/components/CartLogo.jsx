@@ -69,9 +69,6 @@ export default function CartLogo({ animation = "idle", className }) {
     sad: {
       d: ["M 40 53 Q 52 63 64 53", "M 43 56 Q 52 48 61 56"],
     },
-    idle: {
-      d: "M 40 53 Q 52 63 64 53",
-    },
   };
 
   const { userData, setUserData } = useContext(UserContext);
@@ -139,7 +136,7 @@ export default function CartLogo({ animation = "idle", className }) {
           <motion.path
             id="tae"
             variants={mouthVariants}
-            animate={animation || "breath"}
+            animate={animation}
             style={{
               transition: "none",
             }}

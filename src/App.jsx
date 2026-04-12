@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, use } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import "./App.css";
 import Header from "./components/Header.jsx";
 import ProductCard from "./components/ProductCard.jsx";
@@ -8,30 +8,40 @@ import CartButton from "./components/CartButton.jsx";
 import ModalPurchase from "./components/ModalPurchase.jsx";
 import { UserContext } from "./data/userdata.jsx";
 import { including } from "./functions.js";
+import CartLogo from "./components/CartLogo.jsx";
 
 export default function App() {
   const { userData, setUserData } = useContext(UserContext);
   const [showPurchase, setShowPurchase] = useState(false);
   const [cost, setCost] = useState(0);
   const [search, setSearch] = useState("");
+  const [showIntro, setShowIntro] = useState(true);
+  const [animation, setAnimation] = useState("idle");
+  const isStarted = useRef(false);
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   useEffect(() => {
-    function handleLoad() {
-      console.log("All assets loaded (images, etc.)");
-      // your function here
-    }
+    if (isStarted.current) return;
+    isStarted.current = true;
 
-    if (document.readyState === "complete") {
-      // already loaded
-      handleLoad();
-    } else {
-      window.addEventListener("load", handleLoad);
+    async function animate() {
+      await sleep(200);
+      setAnimation("seek");
+      await sleep(1700);
+      setAnimation("");
+      await sleep(2000);
+      setShowIntro(false);
+      document.body.style.overflow = "";
     }
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
+    animate();
   }, []);
+
+  useEffect(() => {
+    if (showIntro) document.querySelector("body").style.overflow = "hidden";
+  }, [showIntro]);
 
   return (
     <>
@@ -99,6 +109,39 @@ export default function App() {
       />
       <CartPage setPurchase={setShowPurchase} setCost={setCost} />
       <ModalPurchase cost={cost} state={[showPurchase, setShowPurchase]} />
+
+      {/*Intro Frame*/}
+      <div
+        className={
+          (!showIntro ? "hidden" : "") +
+          " z-5 flex items-center justify-center fixed top-0 left-0 w-full h-full bg-(--background1)"
+        }
+      >
+        <div className="flex relative">
+          <p className="top-1/2 text-lg absolute left-1/2 -translate-x-1/2 text-center w-max text-(--color1)">
+            Please Wait
+          </p>
+          <div className="z-1 w-screen justify-center flex bg-(--background1)">
+            <div className="flex items-center w-max">
+              <CartLogo
+                animation={animation}
+                className="w-21 h-21 filter-(--invert)"
+              />
+              <div
+                className={
+                  (animation != "" ? "w-0" : "w-58") +
+                  " overflow-hidden justify-end flex"
+                }
+                style={{ transition: "all 0.6s" }}
+              >
+                <p className="ml-auto  font-bold text-5xl text-(--color1)">
+                  Grocerian
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
