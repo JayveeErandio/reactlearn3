@@ -53,7 +53,7 @@ export default function App() {
       >
         <div className="mx-6 lg:mx-40">
           <Header className="sticky top-0 z-2" setSearch={setSearch} />
-          <div>
+          <div className="pb-30">
             {groceryData.map((category) => {
               let matchCategory = including(search, category.name); //Search Algorithm
               let matchProduct = //Search Algorithm: Whether this category has at least one product matching the search term
