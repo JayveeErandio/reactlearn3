@@ -44,23 +44,26 @@ export default function ItemNoProductPage(props) {
       </div>
       {/* Main Center */}
       <p
-        className="text-2xl flex justify-center items-center text-white absolute top-1/2 left-1/2 -translate-1/2 w-45/100 h-45/100"
+        className={
+          (quantity == 0 ? "cursor-pointer" : "") +
+          " text-2xl flex justify-center items-center text-white absolute top-1/2 left-1/2 -translate-1/2 w-45/100 h-45/100"
+        }
         style={{
           borderRadius: 100,
           background:
             quantity == 0 ? "var(--background1)" : "var(--background3)",
+        }}
+        onClick={() => {
+          if (quantity == 0) setQuantity(++quantity);
         }}
       >
         {quantity > 0 ? (
           quantity
         ) : (
           <svg
-            onClick={() => {
-              setQuantity(++quantity);
-            }}
             src="icons/add.svg"
             alt="Add item"
-            className="w-1/2 h-1/2 cursor-pointer"
+            className="w-1/2 h-1/2"
             style={{ filter: "invert(0.8)" }}
             width="35px"
             height="35px"
