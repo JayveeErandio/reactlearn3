@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    viewBox="-7 -7 112 114"
+    width="50px"
+    height="50px"
+	xmlns="http://www.w3.org/2000/svg"
+>
+    <g id="body">  
+		<path stroke="#333" stroke-width="7" fill="none" d="M 20 25 H 77 L 81 95 H 16 Z M 34 37 V 18 A 14 14 0 0 1 62 18 V 37" />
+		<g style="transform: translate(-9px, 18px) scale(1.1)">
+          <g>
+            <g>
+              <use href="#cir" x="42" y="44" />
+              <circle r="1.5" cx="43.5" cy="42.5" fill="white" />
+            </g>
+            <g>
+              <use href="#cir" x="63" y="44" />
+              <circle r="1.5" cx="64.5" cy="42.5" fill="white" />
+            </g>
+          </g>
+          <path
+            fill="none"
+            d="M 40 53 Q 52 63 64 53"
+            stroke-width="4.5"
+            stroke="#333"
+          />
+        </g>
+      </g>
+	  <defs><circle id="cir" r="5" cx="0" cy="0" fill="#333" /></defs>
+    </svg>
