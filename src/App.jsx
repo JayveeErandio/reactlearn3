@@ -30,7 +30,7 @@ export default function App() {
     async function animate() {
       await sleep(200);
       setAnimation("seek");
-      await sleep(1700);
+      await sleep(1600);
       setAnimation("");
       await sleep(2000);
       setShowIntro(false);

@@ -24,6 +24,14 @@ export default function CartLogo({ animation = "idle", className }) {
         repeat: Infinity,
       },
     },
+    bounce: {
+      scaleX: [1, 0.91, 0.91, 1.2, 1],
+      scaleY: [1, 1.21, 1.21, 0.8, 1],
+      transition: {
+        duration: 0.4,
+        times: [0, 0.3, 0.45, 0.7, 1],
+      },
+    },
   };
   const faceVariants = {
     seek: {
@@ -101,7 +109,7 @@ export default function CartLogo({ animation = "idle", className }) {
         <path
           strokeWidth="6.4"
           stroke="#333"
-          d="M10 20 H 20 L 30 75 H 80 M 22 31 H 84 L 75 66 H 28"
+          d="M10 20 H 20 L 30 75 H 80 M 22 31 H 84 L 75 66 H 29"
           fill="none"
         />
         <g>
