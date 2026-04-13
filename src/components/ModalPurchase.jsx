@@ -17,7 +17,7 @@ export default function ModalPurchase({ cost = 0, state }) {
           setCartAnim("bounce");
           setTimeout(() => {
             setIcon(true);
-          }, 350);
+          }, 250);
         }, 300);
       }, 640);
     } else {

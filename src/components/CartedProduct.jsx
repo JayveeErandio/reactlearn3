@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import Checkbox from "./Checkbox";
 import { sentence_case } from "../functions";
-import ModalRemove from "./ModalRemove";
 
 export default function CartedProduct(props) {
   let [defQuantity, defSetQuantity] = useState(0);
@@ -12,15 +11,32 @@ export default function CartedProduct(props) {
   let check = props.check ?? defCheck;
   let setCheck = props.setCheck ?? defSetCheck;
 
+  let [revealProgress, setRevealProgress] = useState(0);
+
+  let [move, setMove] = useState(false);
+
   const cost = props.reference.price * props.prod.quantity;
   useEffect(() => {
     props.setTotal((prev) => prev + cost);
   }, []);
 
+  useEffect(() => {
+    setRevealProgress(0);
+    if (props.departure) {
+      setRevealProgress(100);
+      setTimeout(() => {
+        setMove(true);
+      }, 500);
+    }
+  }, [props.departure]);
+
   return (
     <div
       key={props.id}
-      className="my-6 rounded-xl shadow-md p-1 flex gap-1 pt-2"
+      className={
+        (move ? "departuring" : "") +
+        " h-[74px] overflow-hidden relative mt-6 rounded-xl shadow-md p-1 flex gap-1 pt-2"
+      }
       style={{ background: "var(--background2)" }}
     >
       <Checkbox
@@ -85,6 +101,18 @@ export default function CartedProduct(props) {
         >
           ₱{(props.reference.price * props.prod.quantity)?.toFixed(2)}
         </p>
+      </div>
+      <div
+        className={
+          "w-" +
+          revealProgress +
+          "/100 overflow-hidden absolute h-full bg-red-500 top-0 left-0"
+        }
+      >
+        <img
+          src="icons/removed.svg"
+          className="invert relative top-1/2 -translate-1/2 h-1/2 left-1/2 min-w-[50px]"
+        />
       </div>
     </div>
   );

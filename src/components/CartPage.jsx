@@ -24,7 +24,8 @@ export default function CartPage({ setPurchase, setCost }) {
 
   const [showRemove, setShowRemove] = useState(false);
   let [productRemove, setProductRemove] = useState("");
-  let [listRemove, setListRemove] = useState([202]);
+  let [listRemove, setListRemove] = useState([]);
+  const [departuring, setDeparturing] = useState(false);
 
   useEffect(() => {
     if (userData.showCart) setShow(true);
@@ -161,7 +162,7 @@ export default function CartPage({ setPurchase, setCost }) {
               </div>
             </div>
           </header>
-          <div className="-my-6 overflow-auto flex-1 py-6">
+          <div className="-my-6 pb-12 overflow-auto flex-1 py-6">
             {(() => {
               if (!userData.cart.length)
                 return (
@@ -173,42 +174,52 @@ export default function CartPage({ setPurchase, setCost }) {
                   </p>
                 );
             })()}
-            {userData.cart.map((product, index) => (
-              <CartedProduct
-                quantity={product.quantity}
-                setQuantity={(newQuantity) => {
-                  setUserData((prev) => ({
-                    ...prev,
-                    cart: prev.cart.map((item) =>
-                      item.id === product.id
-                        ? { ...item, quantity: newQuantity }
-                        : item,
-                    ),
-                  }));
-                }}
-                check={product.isListed}
-                setCheck={() => {
-                  setUserData((prev) => ({
-                    ...prev,
-                    cart: prev.cart.map((item) =>
-                      item.id === product.id
-                        ? { ...item, isListed: !product.isListed }
-                        : item,
-                    ),
-                  }));
-                }}
-                prod={product}
-                key={index}
-                id={index}
-                reference={getData(product.id)}
-                setTotal={setTotal}
-                showRemove={() => {
-                  setListRemove([product.id]);
-                  setShowRemove(true);
-                }}
-                setMessageRemove={setProductRemove}
-              />
-            ))}
+            {userData.cart.map((product, index) => {
+              return (
+                <CartedProduct
+                  quantity={product.quantity}
+                  setQuantity={(newQuantity) => {
+                    setUserData((prev) => ({
+                      ...prev,
+                      cart: prev.cart.map((item) =>
+                        item.id === product.id
+                          ? { ...item, quantity: newQuantity }
+                          : item,
+                      ),
+                    }));
+                  }}
+                  check={product.isListed}
+                  setCheck={() => {
+                    setUserData((prev) => ({
+                      ...prev,
+                      cart: prev.cart.map((item) =>
+                        item.id === product.id
+                          ? { ...item, isListed: !product.isListed }
+                          : item,
+                      ),
+                    }));
+                  }}
+                  prod={product}
+                  key={product.id}
+                  id={index}
+                  reference={getData(product.id)}
+                  setTotal={setTotal}
+                  showRemove={() => {
+                    setListRemove([product.id]);
+                    setShowRemove(true);
+                  }}
+                  setMessageRemove={setProductRemove}
+                  departure={(() => {
+                    if (departuring) {
+                      if (listRemove.find((value) => product.id == value)) {
+                        //console.log(listRemove, product.id);
+                        return "remove";
+                      }
+                    }
+                  })()}
+                />
+              );
+            })}
           </div>
           <footer
             className="z-1 flex justify-between p-5 py-8 rounded-t-3xl"
@@ -244,12 +255,16 @@ export default function CartPage({ setPurchase, setCost }) {
       <ModalRemove
         ids={listRemove}
         set={(list) => {
-          setUserData({
-            ...userData,
-            cart: userData.cart.filter((product) => {
-              return !list.find((ev) => ev == product.id);
-            }),
-          });
+          setDeparturing(true);
+          setTimeout(function () {
+            setUserData({
+              ...userData,
+              cart: userData.cart.filter((product) => {
+                return !list.find((ev) => ev == product.id);
+              }),
+            });
+            setDeparturing(false);
+          }, 1400);
         }}
         message={
           <>
