@@ -26,7 +26,7 @@ export default function CartedProduct(props) {
       setRevealProgress(100);
       setTimeout(() => {
         setMove(true);
-      }, 500);
+      }, 300);
     }
   }, [props.departure]);
 
@@ -103,15 +103,12 @@ export default function CartedProduct(props) {
         </p>
       </div>
       <div
-        className={
-          "w-" +
-          revealProgress +
-          "/100 overflow-hidden absolute h-full bg-red-500 top-0 left-0"
-        }
+        className={"overflow-hidden absolute h-full bg-red-500 top-0 left-0"}
+        style={{ width: revealProgress + "%" }}
       >
         <img
           src="icons/removed.svg"
-          className="invert relative top-1/2 -translate-1/2 h-1/2 left-1/2 min-w-[50px]"
+          className="invert relative top-1/2 -translate-y-1/2 h-1/2 left-1/2 w-[37px]"
         />
       </div>
     </div>

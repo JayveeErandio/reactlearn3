@@ -126,10 +126,10 @@ svg * {
     transform: translate(0px);
   }
   30% {
-    transform: translateX(50px);
+    transform: translateX(50%);
   }
   60% {
-    transform: translateX(-350px) scaleY(1);
+    transform: translateX(-100%) scaleY(1);
     margin-top: calc(var(--spacing) * 6);
     margin-bottom: calc(var(--spacing) * 6);
     height: 74px;
@@ -139,7 +139,7 @@ svg * {
   100% {
     padding: 0px;
     margin: 0px;
-    transform: translateX(-350px) scaleY(0);
+    transform: translateX(-100%) scaleY(0);
     height: 0px;
   }
 }
