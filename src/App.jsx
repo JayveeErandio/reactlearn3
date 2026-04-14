@@ -1,16 +1,25 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import "./App.css";
+import { UserContext } from "./data/userdata.jsx";
+import groceryData from "./data/products.js";
 import Header from "./components/Header.jsx";
 import ProductCard from "./components/ProductCard.jsx";
-import groceryData from "./data/products.js";
 import CartPage from "./components/CartPage.jsx";
 import CartButton from "./components/CartButton.jsx";
 import ModalPurchase from "./components/ModalPurchase.jsx";
-import { UserContext } from "./data/userdata.jsx";
-import { including } from "./functions.js";
 import CartLogo from "./components/CartLogo.jsx";
+import SearchBar from "./components/SearchBar.jsx";
+import DarkModeButton from "./components/DarkModeButton.jsx";
+
+function including(basis, target) {
+  return target.toLowerCase().includes(basis.toLowerCase().trim());
+}
 
 export default function App() {
+  function globalSetup() {
+    return { searchText: "" };
+  }
+  const [global, setGlobal] = useState(globalSetup());
+
   const { userData, setUserData } = useContext(UserContext);
   const [showPurchase, setShowPurchase] = useState(false);
   const [cost, setCost] = useState(0);
@@ -45,20 +54,41 @@ export default function App() {
 
   return (
     <>
-      <div
-        className="min-h-screen pt-6 lg:pt-12"
-        style={{
-          background: "var(--background1)",
-        }}
-      >
+      {/* Main Body - Scrollable Content */}
+      <div className="bg-(--background1) min-h-screen">
+        {/* Body's Marginized Container */}
         <div className="mx-6 lg:mx-40">
-          <Header className="sticky top-0 z-2" setSearch={setSearch} />
+          <header className="sticky flex justify-between items-center gap-5 top-0 z-2 py-6 bg-(--background1)">
+            <SearchBar
+              className="w-full lg:w-1/2"
+              value={global.searchText}
+              set={(value) => {
+                setGlobal({
+                  ...global,
+                  searchText: value,
+                });
+              }}
+            />
+            <div className="flex w-max items-center gap-7">
+              <DarkModeButton className="h-8" />
+              <CartButton
+                className="w-14 relative text-xs hidden lg:block"
+                quantity={(() => {
+                  let overall = 0;
+                  for (let prod of userData.cart) {
+                    overall += prod.quantity;
+                  }
+                  return overall;
+                })()}
+              />
+            </div>
+          </header>
           <div className="pb-30">
             {groceryData.map((category) => {
-              let matchCategory = including(search, category.name); //Search Algorithm
+              let matchCategory = including(global.searchText, category.name); //Search Algorithm
               let matchProduct = //Search Algorithm: Whether this category has at least one product matching the search term
                 category.products.find((prod) => {
-                  return including(search, prod.name);
+                  return including(global.searchText, prod.name);
                 })
                   ? true
                   : false;
@@ -77,7 +107,7 @@ export default function App() {
                     {category.name}
                   </p>
                   {category.products.map((product) => {
-                    let temp = including(search, product.name);
+                    let temp = including(global.searchText, product.name);
                     return (
                       <ProductCard
                         key={product.id}

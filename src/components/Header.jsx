@@ -17,7 +17,6 @@ export default function Header(props) {
       }
       style={{ background: "var(--background1)" }}
     >
-      <SearchBar onSearch={setSearchTerm} className="w-full lg:w-1/2" />
       <DarkModeButton className="block lg:hidden" />
       <div className="hidden lg:flex items-center gap-7">
         <DarkModeButton className="h-8" />

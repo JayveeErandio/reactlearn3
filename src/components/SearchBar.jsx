@@ -1,40 +1,29 @@
-import { useState } from "react";
-import "tailwindcss";
-
-export default function SearchBar({ onSearch, className }) {
-  const [query, setQuery] = useState("");
-
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-    onSearch(e.target.value);
-  };
-
+export default function SearchBar(args) {
   return (
     <div
-      className={className + " shadow-md flex items-center rounded-4xl px-3 "}
-      style={{ background: "var(--background2)" }}
+      className={
+        "h-max shadow-md flex items-center rounded-full px-3 bg-(--background2) " +
+        args.className
+      }
     >
-      <img
-        src="icons/search.svg"
-        className="h-6"
-        style={{ filter: "var(--invert)" }}
-      />
+      <img src="icons/search.svg" className="h-6 filter-(--invert)" />
       <input
-        type="text"
-        value={query}
-        onChange={handleChange}
-        placeholder="Search for chips, soap bar, etc..."
-        className="outline-none text-sm px-2 py-3 w-full"
-        style={{ color: "var(--color1)" }}
+        value={args.value}
+        onChange={(e) => {
+          args.set(e.target.value);
+        }}
+        placeholder="Search for eggs, soap, etc..."
+        className="outline-none text-sm px-2 py-3 w-full text-(--color1)"
       />
       <img
-        onClick={() => {
-          setQuery("");
-          onSearch("");
-        }}
-        className={(query == "" ? "hidden" : "") + " cursor-pointer w-5"}
         src="icons/cancel.svg"
-        style={{ filter: "var(--invert)" }}
+        onClick={() => {
+          args.set("");
+        }}
+        className={
+          (args.value == "" ? "hidden" : "") +
+          " cursor-pointer w-5 filter-(--invert)"
+        }
       />
     </div>
   );
