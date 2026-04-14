@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { UserContext } from "./data/userdata.jsx";
 import groceryData from "./data/products.js";
-import Header from "./components/Header.jsx";
 import ProductCard from "./components/ProductCard.jsx";
 import CartPage from "./components/CartPage.jsx";
 import CartButton from "./components/CartButton.jsx";
